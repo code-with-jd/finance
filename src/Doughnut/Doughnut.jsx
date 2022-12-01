@@ -1,6 +1,24 @@
+import { CollectionsOutlined, Margin } from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1.5),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+})); //
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -63,6 +81,33 @@ export function CustomChart(props) {
     <div style={{ height: "50vh" }}>
       {console.log(data)}
       <Doughnut data={data} redraw />
+
+      <Box sx={{ flexGrow: 1 }} padding="35px">
+        <Grid container spacing={1}>
+          <Grid container item spacing={3}>
+            <Grid item xs={4}>
+              <Item>
+                Income
+                <br />
+                {income}€
+              </Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item>
+                Expenses
+                <br />€
+              </Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item>
+                Balance
+                <br />
+                {expenses}€
+              </Item>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   );
 }

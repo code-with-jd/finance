@@ -1,8 +1,11 @@
+import AddIcon from "@mui/icons-material/Add";
 // Grid
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+//fancy button
+import Fab from "@mui/material/Fab";
 //Select
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
@@ -10,10 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-
 import React from "react";
-
-/* const emails = ["username@gmail.com", "user02@gmail.com"]; */
 
 export default function SimpleDialog(props) {
   //Select
@@ -44,8 +44,10 @@ export default function SimpleDialog(props) {
 
   return (
     <div>
-      <Button onClick={handleClickOpen}> Add Spending</Button>
-
+      {/* <Button onClick={handleClickOpen}> Add Spending</Button> */}
+      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
+        <AddIcon />
+      </Fab>
       <Dialog onClose={handleClickOpen} open={open}>
         <DialogTitle>Add New Spending</DialogTitle>
         <Box>
@@ -87,43 +89,43 @@ export default function SimpleDialog(props) {
                   onChange={handleChange}
                 >
                   <MenuItem
-                    value={"FoodIcon"}
+                    value={"Food"}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     Food
                   </MenuItem>
                   <MenuItem
-                    value={"ClothesIcon"}
+                    value={"Clothes"}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     Clothes
                   </MenuItem>
                   <MenuItem
-                    value={"HousingIcon"}
+                    value={"Housing"}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     Housing
                   </MenuItem>
                   <MenuItem
-                    value={"TransportationIcon"}
+                    value={"Transportation"}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     Transportation
                   </MenuItem>
                   <MenuItem
-                    value={"HealthIcon"}
+                    value={"Health"}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     Health
                   </MenuItem>
                   <MenuItem
-                    value={"EntertainmentIcon"}
+                    value={"Entertainment"}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     Entertainment
                   </MenuItem>
                   <MenuItem
-                    value={"OtherIcon"}
+                    value={"Other"}
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     Other

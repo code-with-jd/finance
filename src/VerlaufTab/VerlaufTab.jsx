@@ -1,23 +1,25 @@
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { Avatar } from "@mui/material";
+import BluetoothIcon from "@mui/icons-material/Bluetooth";
+import WifiIcon from "@mui/icons-material/Wifi";
 // Grid
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 //Select
-import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
+import IconButton from "@mui/material/IconButton";
+//fancy css <3
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
 //Avatar
 import ListItemText from "@mui/material/ListItemText";
-import MenuItem from "@mui/material/MenuItem";
+import ListSubheader from "@mui/material/ListSubheader";
 import Paper from "@mui/material/Paper";
-import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
+import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
-import { CustomChart } from "../Doughnut/Doughnut";
 
+import { CustomChart } from "../Doughnut/Doughnut";
 import DynamicTagAvatar from "../DynamicTagAvatar/DynamicTagAvatar";
 import SimpleDialog from "./SimpleDialog";
 
@@ -39,7 +41,7 @@ export default function VerlaufTab() {
   let nextId = 0;
 
   //Select
-  const [category, setCategory] = React.useState("OtherIcon");
+  const [category, setCategory] = React.useState("Other");
 
   function handleEditModeClick() {
     //WICHTIG: Button für Page Switcher
@@ -76,10 +78,43 @@ export default function VerlaufTab() {
         />
       </div>
       <div>
-        <Typography variant="h6" gutterBottom>
-          Transaction
-        </Typography>
-        <Box>
+        <Item
+          key={array.id}
+          elevation={1}
+          sx={{
+            bgcolor: "background.paper",
+            orientation: "vertical",
+          }}
+        >
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            subheader={<ListSubheader>Transactions</ListSubheader>}
+          >
+            <Box>
+              {array.map((neuesFeld) => (
+                <>
+                  <Divider light />
+                  <ListItem>
+                    <ListItemIcon>
+                      <DynamicTagAvatar
+                        tag={neuesFeld.category}
+                        sx={{ display: "inline" }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={neuesFeld.name} />
+                    <IconButton edge="end" aria-label="delete">
+                      <ListItemText
+                        edge="end"
+                        secondary={neuesFeld.amount + "€"}
+                      />
+                    </IconButton>
+                  </ListItem>
+                </>
+              ))}
+            </Box>
+          </List>
+        </Item>
+        {/* <Box>
           <Grid container spacing={3}>
             {array.map((neuesFeld) => (
               <Grid item xs={12} zeroMinWidth>
@@ -101,17 +136,14 @@ export default function VerlaufTab() {
                   />
                   <ListItemText
                     secondary={neuesFeld.amount + "€"}
-                    justify="flex-end"
+                    aria-label={neuesFeld.amount + "€"}
                     sx={{ display: "inline" }}
                   />
                 </Item>
               </Grid>
             ))}
           </Grid>
-        </Box>
-
-        {/* <Chart /> */}
-
+        </Box> */}
         {/* <Alert variant="outlined" severity="success">
             This is a success alert — check it out!
           </Alert> how to time this*/}
