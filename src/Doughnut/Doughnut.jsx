@@ -62,7 +62,7 @@ export function CustomChart(props) {
   return (
     <div style={{ height: "50vh" }}>
       {console.log(data)}
-      <Doughnut data={data} />
+      <Doughnut data={data} redraw />
     </div>
   );
 }
