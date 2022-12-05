@@ -9,7 +9,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -22,67 +22,108 @@ const Item = styled(Paper)(({ theme }) => ({
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-let categoryArray = [0];
-let amountArray = [0];
+export default function CustomChart(props) {
+  let categoryArray = [0];
+  // let amountArray = [];
+  let amountArray = [10, 20, 30, 40, 50, 60, 70];
 
-export const data = {
-  labels: categoryArray,
-  datasets: [
-    {
-      label: "# of Votes",
-      data: amountArray,
-      backgroundColor: [
-        "rgba(255, 0, 0, 0.5)",
-        "rgba(54, 162, 235, 0.48)",
-        "rgba(255, 206, 86, 0.48)",
-        "rgba(75, 192, 192, 0.48)",
-        "rgba(153, 102, 255, 0.48)",
-        "rgba(255, 159, 64, 0.48)",
-        "rgba(255, 105, 180, 0.48)",
-      ],
-      borderColor: [
-        "rgba(255, 0, 0, 0.96)",
-        "rgba(54, 162, 235, 0.96)",
-        "rgba(255, 206, 86, 0.96)",
-        "rgba(75, 192, 192, 0.96)",
-        "rgba(153, 102, 255, 0.96)",
-        "rgba(255, 159, 64, 0.96)",
-        "rgba(255, 105, 180, 0.96)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+  //UseState
+  const [amountArrayState, setAmountArrayState] = useState([
+    10, 20, 30, 40, 50, 60, 70,
+  ]);
 
-export function CustomChart(props) {
-  props.array.forEach((item) => {
-    console.log(item.category);
-    console.log(amountArray);
-  });
+  //UseEffekt
+  useEffect(() => {
+    console.log("Neuer Eintrag");
 
-  categoryArray = props.array.map((item) => {
-    data.labels = categoryArray;
-    return item.category;
-  });
-  amountArray = props.array.map((item) => {
-    return +item.amount;
-  });
-  /* console.log(amountArray); */
+    return () => {
+      // console.log("add value now");
+      console.log(props.array);
 
-  data.datasets[0].data = amountArray;
+      for (let i = 0; i < props.array.length; i++) {
+        switch (props.array[i].category) {
+          case "Food":
+            // return (amountArray[0] += parseInt(props.array[i].amount));
+            return setAmountArrayState[0](
+              amountArrayState + parseInt(props.array[i].amount)
+            );
 
-  /* useEffect(() => {
-  }, []); */
-  /* console.log(typeof props);
-  console.log(props);
-  console.log(props.array.length); */
+          // Normale Array
+          // console.log("hi uwu" + amountArray[0]);
+          // amountArray[0] += parseInt(props.array[i].amount);
+          // console.log("hi uwu" + amountArray[0]);
+
+          //useState
+          // console.log("NEW" + amountArrayState[0]);
+          // {
+          //   setAmountArrayState[0] += parseInt(props.array[i].amount);
+          // }
+          // console.log("NEWer" + amountArrayState[0]);
+
+          // (amountArray[0] += props.array[i].amount)
+          case "Clothes":
+            return console.log("ClothesSs");
+          case "Housing":
+            return;
+          case "Transportation":
+            return;
+          case "Health":
+            return;
+          case "Entertainment":
+            return;
+          case "Other":
+            return;
+        }
+      }
+
+      // data.datasets[0].data[0] = amountArray[0];
+    };
+  }, [props.array.length]);
+
+  const data = {
+    labels: [
+      "Food",
+      "Clothes",
+      "Housing",
+      "Transportation",
+      "Health",
+      "Entertainment",
+      "Other",
+    ],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: amountArray,
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 205, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(201, 203, 207, 0.2)",
+        ],
+        borderColor: [
+          "rgb(255, 99, 132)",
+          "rgb(255, 159, 64)",
+          "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)",
+          "rgb(54, 162, 235)",
+          "rgb(153, 102, 255)",
+          "rgb(201, 203, 207)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
     <div style={{ height: "50vh" }}>
-      {console.log(data)}
+      {/* {console.log(data)} */}
+      {/* redraw durch useEffect austauschen*/}
       <Doughnut data={data} redraw />
 
-      <Box sx={{ flexGrow: 1 }} padding="35px">
+      {/* <Box sx={{ flexGrow: 1 }} padding="35px">
         <Grid container spacing={1}>
           <Grid container item spacing={3}>
             <Grid item xs={4}>
@@ -107,7 +148,7 @@ export function CustomChart(props) {
             </Grid>
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
     </div>
   );
 }

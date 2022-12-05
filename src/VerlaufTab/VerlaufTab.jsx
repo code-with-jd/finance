@@ -19,7 +19,8 @@ import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
-import { CustomChart } from "../Doughnut/Doughnut";
+import CustomChart from "../Doughnut/Doughnut";
+// import CustomChart from "../Doughnut/CustomChart";
 import DynamicTagAvatar from "../DynamicTagAvatar/DynamicTagAvatar";
 import SimpleDialog from "./SimpleDialog";
 
