@@ -35,47 +35,44 @@ export default function CustomChart(props) {
   //UseEffekt
   useEffect(() => {
     console.log("Neuer Eintrag");
+    for (let i = 0; i < props.array.length; i++) {
+      switch (props.array[i].category) {
+        case "Food":
+          // return (amountArray[0] += parseInt(props.array[i].amount));
+          return setAmountArrayState[0](
+            amountArrayState + parseInt(props.array[i].amount)
+          );
 
+        // Normale Array
+        // console.log("hi uwu" + amountArray[0]);
+        // amountArray[0] += parseInt(props.array[i].amount);
+        // console.log("hi uwu" + amountArray[0]);
+
+        //useState
+        // console.log("NEW" + amountArrayState[0]);
+        // {
+        //   setAmountArrayState[0] += parseInt(props.array[i].amount);
+        // }
+        // console.log("NEWer" + amountArrayState[0]);
+
+        // (amountArray[0] += props.array[i].amount)
+        case "Clothes":
+          return console.log("ClothesSs");
+        case "Housing":
+          return;
+        case "Transportation":
+          return;
+        case "Health":
+          return;
+        case "Entertainment":
+          return;
+        case "Other":
+          return;
+      }
+    }
     return () => {
       // console.log("add value now");
       console.log(props.array);
-
-      for (let i = 0; i < props.array.length; i++) {
-        switch (props.array[i].category) {
-          case "Food":
-            // return (amountArray[0] += parseInt(props.array[i].amount));
-            return setAmountArrayState[0](
-              amountArrayState + parseInt(props.array[i].amount)
-            );
-
-          // Normale Array
-          // console.log("hi uwu" + amountArray[0]);
-          // amountArray[0] += parseInt(props.array[i].amount);
-          // console.log("hi uwu" + amountArray[0]);
-
-          //useState
-          // console.log("NEW" + amountArrayState[0]);
-          // {
-          //   setAmountArrayState[0] += parseInt(props.array[i].amount);
-          // }
-          // console.log("NEWer" + amountArrayState[0]);
-
-          // (amountArray[0] += props.array[i].amount)
-          case "Clothes":
-            return console.log("ClothesSs");
-          case "Housing":
-            return;
-          case "Transportation":
-            return;
-          case "Health":
-            return;
-          case "Entertainment":
-            return;
-          case "Other":
-            return;
-        }
-      }
-
       // data.datasets[0].data[0] = amountArray[0];
     };
   }, [props.array.length]);
