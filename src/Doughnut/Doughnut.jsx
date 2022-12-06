@@ -9,7 +9,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,14 +23,8 @@ const Item = styled(Paper)(({ theme }) => ({
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function CustomChart(props) {
-  let categoryArray = [0];
-  // let amountArray = [];
   let amountArray = [10, 20, 30, 40, 50, 60, 70];
-
-  //UseState
-  const [amountArrayState, setAmountArrayState] = useState([
-    10, 20, 30, 40, 50, 60, 70,
-  ]);
+  let income = 3000;
 
   //UseEffekt
   useEffect(() => {
@@ -39,53 +33,39 @@ export default function CustomChart(props) {
       switch (props.array[i].category) {
         case "Food":
           // return (amountArray[0] += parseInt(props.array[i].amount));
-          return setAmountArrayState[0](
-            amountArrayState + parseInt(props.array[i].amount)
-          );
-
-        // Normale Array
-        // console.log("hi uwu" + amountArray[0]);
-        // amountArray[0] += parseInt(props.array[i].amount);
-        // console.log("hi uwu" + amountArray[0]);
-
-        //useState
-        // console.log("NEW" + amountArrayState[0]);
-        // {
-        //   setAmountArrayState[0] += parseInt(props.array[i].amount);
-        // }
-        // console.log("NEWer" + amountArrayState[0]);
-
-        // (amountArray[0] += props.array[i].amount)
+          amountArray[0] = amountArray[0] + parseInt(props.array[i].amount);
+          break;
         case "Clothes":
-          return console.log("ClothesSs");
+          amountArray[1] = amountArray[1] + parseInt(props.array[i].amount);
+          break;
         case "Housing":
-          return;
+          amountArray[2] = amountArray[2] + parseInt(props.array[i].amount);
+          break;
         case "Transportation":
-          return;
+          amountArray[3] = amountArray[3] + parseInt(props.array[i].amount);
+          break;
         case "Health":
-          return;
+          amountArray[4] = amountArray[4] + parseInt(props.array[i].amount);
+          break;
         case "Entertainment":
-          return;
+          amountArray[5] = amountArray[5] + parseInt(props.array[i].amount);
+          break;
         case "Other":
-          return;
+          amountArray[6] = amountArray[6] + parseInt(props.array[i].amount);
+          break;
       }
     }
-    return () => {
-      // console.log("add value now");
-      console.log(props.array);
-      // data.datasets[0].data[0] = amountArray[0];
-    };
   }, [props.array.length]);
 
   const data = {
     labels: [
-      "Food",
-      "Clothes",
-      "Housing",
-      "Transportation",
-      "Health",
-      "Entertainment",
-      "Other",
+      "Food " + amountArray[0] + "$",
+      "Clothes " + amountArray[1] + "$",
+      "Housing " + amountArray[2] + "$",
+      "Transportation " + amountArray[3] + "$",
+      "Health " + amountArray[4] + "$",
+      "Entertainment " + amountArray[5] + "$",
+      "Other " + amountArray[6] + "$",
     ],
     datasets: [
       {
@@ -116,11 +96,8 @@ export default function CustomChart(props) {
 
   return (
     <div style={{ height: "50vh" }}>
-      {/* {console.log(data)} */}
       {/* redraw durch useEffect austauschen*/}
-      <Doughnut data={data} redraw />
-
-      {/* <Box sx={{ flexGrow: 1 }} padding="35px">
+      <Box sx={{ flexGrow: 1 }} padding="35px">
         <Grid container spacing={1}>
           <Grid container item spacing={3}>
             <Grid item xs={4}>
@@ -131,21 +108,30 @@ export default function CustomChart(props) {
               </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item>
+              <Item redraw>
                 Expenses
-                <br />€
+                <br />
+                {amountArray.reduce(
+                  (accumulator, currentValue) => accumulator + currentValue
+                )}
+                €
               </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item>
+              <Item redraw>
                 Balance
                 <br />
-                {expenses}€
+                {3000 -
+                  amountArray.reduce(
+                    (accumulator, currentValue) => accumulator + currentValue
+                  )}
+                €
               </Item>
             </Grid>
           </Grid>
         </Grid>
-      </Box> */}
+      </Box>
+      <Doughnut data={data} redraw />
     </div>
   );
 }

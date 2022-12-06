@@ -43,7 +43,7 @@ export default function SimpleDialog(props) {
   }; //Select
 
   return (
-    <div>
+    <div style={{ marginTop: 8 + "em" }}>
       {/* <Button onClick={handleClickOpen}> Add Spending</Button> */}
       <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
         <AddIcon />

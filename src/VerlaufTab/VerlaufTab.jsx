@@ -15,12 +15,10 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
 import CustomChart from "../Doughnut/Doughnut";
-// import CustomChart from "../Doughnut/CustomChart";
 import DynamicTagAvatar from "../DynamicTagAvatar/DynamicTagAvatar";
 import SimpleDialog from "./SimpleDialog";
 
@@ -61,7 +59,7 @@ export default function VerlaufTab() {
 
   return (
     <div style={{ display: "grid", placeItems: "center" }}>
-      <Typography variant="h4" gutterBottom padding="30px">
+      <Typography variant="h4" paddingTop="20px">
         Money Tracker
       </Typography>
 
